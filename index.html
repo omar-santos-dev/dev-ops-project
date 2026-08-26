@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Omar SantosColón - Digital Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <style>
+    body, h1, h2, h3, h4, h5, h6 { font-family: "Montserrat", sans-serif; }
+    
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar { width: 120px; background: #111; }
+    
+    /* Add a left margin to the "page content" that matches the width of the sidebar */
+    #main { margin-left: 120px; }
+    
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {
+      #main { margin-left: 0; }
+    }
+
+    /* ==========================================
+       Smooth Scrolling & Slide-In Transitions
+       ========================================== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* 1. Header Load Animation (Slide-Down) */
+    .slide-down {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+      animation: slideDownOnLoad 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownOnLoad {
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* 2. Scroll Animations (Slide-Up) */
+    .scroll-slide {
+      opacity: 0;
+      transform: translate3d(0, 50px, 0);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity; /* Optimizes browser rendering */
+    }
+
+    /* Activated via JS once scrolled into view */
+    .scroll-slide.active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Interactive Portfolio Cards Styling */
+    .portfolio-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      background-color: #1e1e1e;
+      border: 1px solid #2d2d2d;
+      text-decoration: none;
+      display: block;
+    }
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
+      background-color: #2a2a2a;
+    }
+  </style>
+</head>
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Dynamic local path mapping for profile gif -->
+  <img src="../images/omar.gif" style="width:100%" alt="Profile picture">
+  <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="#portfolio" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-th w3-xxlarge"></i>
+    <p>PORTFOLIO</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#portfolio" class="w3-bar-item w3-button" style="width:25% !important">PORTFOLIO</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+
+  <!-- Header/Home (Slides down smoothly on load) -->
+  <header class="w3-container w3-padding-32 w3-center w3-black slide-down" id="home">
+    <img src="../images/omar.gif" alt="Omar SantosColón" class="w3-image w3-circle w3-margin-bottom" style="width:150px; height:150px; object-fit: cover; border: 2px solid #333;">
+    <h1 class="w3-jumbo">Omar SantosColón</h1>
+    <p class="w3-large w3-text-grey">IT & Systems Specialist | Cyber Operations | Web Developer</p>
+  </header>
+
+  <!-- About / Welcome Section (Slides up on scroll) -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64 scroll-slide" id="about">
+    <h2 class="w3-text-light-grey">Welcome to My Portfolio</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>
+      My journey in IT has been shaped by curiosity, hands‑on learning, and a drive to understand how systems really work behind the scenes. Over the years, I’ve built experience in areas like system support, networking, cybersecurity fundamentals, and infrastructure management, while also exploring the creative side of technology through JavaScript projects and interactive web tools.
+    </p>
+    <p>
+      I enjoy breaking down complex problems, building solutions that actually work, and constantly pushing myself to learn something new whether that’s experimenting with code, improving my workflow, or diving deeper into the technologies that keep modern systems running. This space highlights the projects, skills, and interests that have helped me grow as an IT professional and continue to shape the way I approach technology today.
+    </p>
+  </div>
+  
+  <!-- Portfolio Directory Cards (Slides up on scroll) -->
+  <div class="w3-padding-64 w3-content scroll-slide" id="portfolio">
+    <h2 class="w3-text-light-grey">Portfolio Sections</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <!-- Grid for main portfolio pathways -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <!-- Card 1: Resume -->
+      <div class="w3-col m4 s12 w3-margin-bottom">
+        <a href="AboutMe.html" class="portfolio-card w3-container w3-padding-24 w3-center">
+          <i class="fa fa-file-text-o w3-xxlarge w3-text-white"></i>
+          <h4 class="w3-text-white">Resume</h4>
+          <p class="w3-text-grey">Professional experience, certifications, and technical skills history.</p>
+        </a>
+      </div>
+      <!-- Card 2: Projects -->
+      <div class="w3-col m4 s12 w3-margin-bottom">
+        <a href="../project/project.html" class="portfolio-card w3-container w3-padding-24 w3-center">
+          <i class="fa fa-code w3-xxlarge w3-text-white"></i>
+          <h4 class="w3-text-white">Projects</h4>
+          <p class="w3-text-grey">Explorations in scripting, cybersecurity tools, and application design.</p>
+        </a>
+      </div>
+      <!-- Card 3: Personal Interest -->
+      <div class="w3-col m4 s12 w3-margin-bottom">
+        <a href="Interest.html" class="portfolio-card w3-container w3-padding-24 w3-center">
+          <i class="fa fa-heart-o w3-xxlarge w3-text-white"></i>
+          <h4 class="w3-text-white">Interests</h4>
+          <p class="w3-text-grey">Diving into hobbies, system building, and specialized technological pursuits.</p>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Second row for remaining paths -->
+    <div class="w3-row-padding w3-section" style="margin:0 -16px">
+      <!-- Card 4: Development -->
+      <div class="w3-col m6 s12 w3-margin-bottom">
+        <a href="Development.html" class="portfolio-card w3-container w3-padding-24 w3-center">
+          <i class="fa fa-terminal w3-xxlarge w3-text-white"></i>
+          <h4 class="w3-text-white">Development</h4>
+          <p class="w3-text-grey">Ongoing learning initiatives, codebases, and continuous education tracks.</p>
+        </a>
+      </div>
+      <!-- Card 5: JCC Main Page Portal Return -->
+      <div class="w3-col m6 s12 w3-margin-bottom">
+        <a href="../index.html" class="portfolio-card w3-container w3-padding-24 w3-center">
+          <i class="fa fa-arrow-circle-left w3-xxlarge w3-text-white"></i>
+          <h4 class="w3-text-white">JCC Main Page</h4>
+          <p class="w3-text-grey">Navigate back to the main directory index of the training sandbox.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section (Slides up on scroll) -->
+  <div class="w3-padding-64 w3-content w3-text-grey scroll-slide" id="contact">
+    <h2 class="w3-text-light-grey">Get in Touch</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
+    <div class="w3-section">
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Email: omar.santos_colon.ctr@us.af.mil</p>
+    </div><br>
+    
+    <p>Send a direct message:</p>
+    <form action="Contact.html" method="GET">
+      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="email" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Omar SantosColón &copy; 2026. Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+<!-- 💡 HIGH-PERFORMANCE SCROLL OBSERVER SCRIPT -->
+<script>
+  const observerOptions = {
+    root: null,
+    threshold: 0.1, // Triggers early for instant responsiveness across all screen sizes
+    rootMargin: "0px 0px -40px 0px"
+  };
+
+  const slideObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Stops observing once triggered to optimize client performance
+      }
+    });
+  }, observerOptions);
+
+  // Initialize observer on all sections flagged for scroll effects
+  document.querySelectorAll('.scroll-slide').forEach(el => slideObserver.observe(el));
+</script>
+
+</body>
+</html>
 
