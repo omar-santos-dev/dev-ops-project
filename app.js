@@ -35,7 +35,7 @@ form.addEventListener("submit", async function(event) {
     */
 
     const apiPath =
-        "/api/2209290/account_provisioning_api";
+        "https://dev411791.service-now.com/api/2209290/account_provisioning_api/create";
 
 
     const payload = {
