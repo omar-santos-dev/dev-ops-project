@@ -35,7 +35,7 @@ form.addEventListener("submit", async function(event) {
     */
 
     const apiPath =
-        "/api/x_your_scope/account/create";
+        "/api/2209290/account_provisioning_api";
 
 
     const payload = {
