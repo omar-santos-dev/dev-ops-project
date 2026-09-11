@@ -55,7 +55,29 @@ form.addEventListener("submit", async function(event) {
         email: email
     };
 
+try {
 
+    console.log(
+        "Auth header exists:",
+        "Basic " + btoa(apiUsername + ":" + apiPassword)
+    );
+
+    const response = await fetch(
+        instance + apiPath,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization":
+                    "Basic " +
+                    btoa(apiUsername + ":" + apiPassword)
+            },
+
+            body: JSON.stringify(payload)
+        }
+    );
     try {
 
         const response = await fetch(
