@@ -11,7 +11,7 @@ form.addEventListener("submit", async function(event) {
         document.getElementById("instance").value.replace(/\/$/, "");
 
     const apiUsername =
-        document.getElementById("apiUsername").value;
+        document.getElementById("apiUsername").value.trim();
 
     const apiPassword =
         document.getElementById("apiPassword").value;
