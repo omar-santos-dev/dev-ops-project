@@ -16,6 +16,12 @@ form.addEventListener("submit", async function(event) {
     const apiPassword =
         document.getElementById("apiPassword").value;
 
+    console.log("Username:", apiUsername);
+        console.log(
+            "Auth test:",
+             btoa(apiUsername + ":" + apiPassword)
+    );
+
     const username =
         document.getElementById("username").value;
 
