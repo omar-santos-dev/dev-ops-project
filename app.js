@@ -21,12 +21,25 @@ form.addEventListener("submit", async (event) => {
         .getElementById("apiPassword")
         .value;
 
-    const payload = {
+// Make sure both passwords match
+if (tempPassword !== confirmPassword) {
+    result.textContent = "Temporary passwords do not match.";
+    return;
+}
+
+// Basic client-side validation
+if (tempPassword.length < 8) {
+    result.textContent =
+        "Temporary password must be at least 8 characters.";
+    return;
+}
+
+const payload = {
     user_name: document.getElementById("username").value.trim(),
     first_name: document.getElementById("firstName").value.trim(),
     last_name: document.getElementById("lastName").value.trim(),
     email: document.getElementById("email").value.trim(),
-    password: document.getElementById("newUserPassword").value
+    temporary_password: tempPassword
 };
 
     const apiUrl = instance + API_PATH;
