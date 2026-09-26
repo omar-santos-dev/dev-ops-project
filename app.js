@@ -22,11 +22,12 @@ form.addEventListener("submit", async (event) => {
         .value;
 
     const payload = {
-        user_name: document.getElementById("username").value.trim(),
-        first_name: document.getElementById("firstName").value.trim(),
-        last_name: document.getElementById("lastName").value.trim(),
-        email: document.getElementById("email").value.trim()
-    };
+    user_name: document.getElementById("username").value.trim(),
+    first_name: document.getElementById("firstName").value.trim(),
+    last_name: document.getElementById("lastName").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    password: document.getElementById("newUserPassword").value
+};
 
     const apiUrl = instance + API_PATH;
 
