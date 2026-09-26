@@ -1,156 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ServiceNow User Provisioning Lab</title>
+<head>
+    <title>ServiceNow Account Provisioning</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Same libraries used by index.html -->
+    <link rel="stylesheet"
+          href="https://www.w3schools.com/w3css/5/w3.css">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #f4f6f8;
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Montserrat", sans-serif;
         }
 
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        body {
+            background: #000;
         }
+
+        /* -----------------------------
+           Sidebar
+        ----------------------------- */
+
+        .w3-sidebar {
+            width: 120px;
+            background: #111;
+        }
+
+        #main {
+            margin-left: 120px;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            #main {
+                margin-left: 0;
+            }
+
+        }
+
+        /* -----------------------------
+           Page animation
+        ----------------------------- */
+
+        .slide-down {
+            opacity: 0;
+            transform: translate3d(0, -30px, 0);
+
+            animation:
+                slideDownOnLoad
+                1s
+                cubic-bezier(0.16, 1, 0.3, 1)
+                forwards;
+        }
+
+        @keyframes slideDownOnLoad {
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0);
+
+            animation:
+                slideUpOnLoad
+                1s
+                .2s
+                cubic-bezier(0.16, 1, 0.3, 1)
+                forwards;
+        }
+
+        @keyframes slideUpOnLoad {
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+        }
+
+        /* -----------------------------
+           Provisioning card
+        ----------------------------- */
+
+        .provision-card {
+
+            max-width: 760px;
+
+            margin: auto;
+
+            background: #1e1e1e;
+
+            border: 1px solid #2d2d2d;
+
+            border-radius: 8px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 10px 30px rgba(255,255,255,.04);
+        }
+
+        .section-title {
+
+            color: #fff;
+
+            margin-top: 32px;
+
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+
+            color: #888;
+
+            margin-bottom: 20px;
+        }
+
+        /* -----------------------------
+           Form
+        ----------------------------- */
 
         label {
+
             display: block;
-            margin-top: 15px;
-            font-weight: bold;
+
+            color: #ccc;
+
+            font-weight: 600;
+
+            margin-top: 18px;
+
+            margin-bottom: 7px;
         }
 
-        input {
+        .form-input {
+
             width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-top: 5px;
+
+            padding: 13px;
+
+            border: 1px solid #444;
+
+            border-radius: 4px;
+
+            background: #111;
+
+            color: white;
+
+            outline: none;
+
+            transition:
+                border-color .2s,
+                background-color .2s,
+                box-shadow .2s;
         }
 
-        button {
-            margin-top: 20px;
-            padding: 12px 20px;
-            cursor: pointer;
+        .form-input:focus {
+
+            border-color: #aaa;
+
+            background: #181818;
+
+            box-shadow:
+                0 0 0 2px rgba(255,255,255,.08);
         }
+
+        .form-input::placeholder {
+            color: #666;
+        }
+
+        /* -----------------------------
+           Buttons
+        ----------------------------- */
+
+        .create-button {
+
+            width: 100%;
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-family: "Montserrat", sans-serif;
+
+            font-weight: 600;
+
+            transition:
+                transform .2s,
+                background-color .2s;
+        }
+
+        .create-button:hover {
+
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            text-decoration: none;
+
+            transition: transform .2s;
+        }
+
+        .back-button:hover {
+
+            transform: translateX(-4px);
+        }
+
+        /* -----------------------------
+           Result box
+        ----------------------------- */
 
         #result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #eeeeee;
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #111;
+
+            border-left: 4px solid #777;
+
+            color: #bbb;
+
             white-space: pre-wrap;
+
+            overflow-wrap: anywhere;
         }
+
+        .security-note {
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            background: #111;
+
+            border: 1px solid #333;
+
+            color: #888;
+
+            font-size: 13px;
+        }
+
+        .divider {
+
+            border: 0;
+
+            border-top: 1px solid #333;
+
+            margin: 35px 0;
+        }
+
     </style>
 </head>
 
-<body>
 
-<div class="container">
+<body class="w3-black">
 
-    <h1>ServiceNow Account Provisioning</h1>
 
-    <p>
-        Create a ServiceNow account with a temporary password.
-    </p>
+<!-- =================================
+     DESKTOP SIDEBAR
+================================== -->
 
-    <form id="userForm">
+<nav class="w3-sidebar
+            w3-bar-block
+            w3-small
+            w3-hide-small
+            w3-center">
 
-        <h2>ServiceNow Connection</h2>
+    <a href="index.html"
+       class="w3-bar-item
+              w3-button
+              w3-padding-large
+              w3-hover-black">
 
-        <label for="instance">ServiceNow Instance</label>
-        <input
-            type="text"
-            id="instance"
-            value="https://dev411791.service-now.com"
-            required
-        >
+        <i class="fa fa-home w3-xxlarge"></i>
 
-        <label for="apiUsername">ServiceNow API Username</label>
-        <input
-            type="text"
-            id="apiUsername"
-            autocomplete="username"
-            required
-        >
+        <p>HOME</p>
 
-        <label for="apiPassword">ServiceNow API Password</label>
-        <input
-            type="password"
-            id="apiPassword"
-            autocomplete="current-password"
-            required
-        >
+    </a>
 
-        <h2>New User</h2>
 
-        <label for="username">Username</label>
-        <input
-            type="text"
-            id="username"
-            placeholder="jsmith"
-            required
-        >
+    <a href="#account"
+       class="w3-bar-item
+              w3-button
+              w3-padding-large
+              w3-black">
 
-        <label for="firstName">First Name</label>
-        <input
-            type="text"
-            id="firstName"
-            placeholder="John"
-            required
-        >
+        <i class="fa fa-user-plus w3-xxlarge"></i>
 
-        <label for="lastName">Last Name</label>
-        <input
-            type="text"
-            id="lastName"
-            placeholder="Smith"
-            required
-        >
+        <p>ACCOUNT</p>
 
-        <label for="email">Email</label>
-        <input
-            type="email"
-            id="email"
-            placeholder="john.smith@example.com"
-            required
-        >
+    </a>
 
-        <label for="tempPassword">Temporary Password</label>
-        <input
-            type="password"
-            id="tempPassword"
-            autocomplete="new-password"
-            required
-        >
 
-        <label for="confirmPassword">Confirm Temporary Password</label>
-        <input
-            type="password"
-            id="confirmPassword"
-            autocomplete="new-password"
-            required
-        >
+    <a href="https://dev411791.service-now.com/login.do"
+       class="w3-bar-item
+              w3-button
+              w3-padding-large
+              w3-hover-black">
 
-        <button type="submit">
-            Create ServiceNow User
-        </button>
+        <i class="fa fa-cloud w3-xxlarge"></i>
 
-    </form>
+        <p>SERVICENOW</p>
 
-    <div id="result">
-        Waiting for request...
+    </a>
+
+</nav>
+
+
+<!-- =================================
+     MOBILE NAVIGATION
+================================== -->
+
+<div class="w3-top
+            w3-hide-large
+            w3-hide-medium"
+     id="myNavbar">
+
+    <div class="w3-bar
+                w3-black
+                w3-opacity
+                w3-hover-opacity-off
+                w3-center
+                w3-small">
+
+        <a href="index.html"
+           class="w3-bar-item w3-button"
+           style="width:33.33% !important">
+
+            HOME
+
+        </a>
+
+
+        <a href="#account"
+           class="w3-bar-item w3-button"
+           style="width:33.33% !important">
+
+            ACCOUNT
+
+        </a>
+
+
+        <a href="https://dev411791.service-now.com/login.do"
+           class="w3-bar-item w3-button"
+           style="width:33.33% !important">
+
+            SERVICENOW
+
+        </a>
+
     </div>
 
 </div>
 
+
+<!-- =================================
+     PAGE CONTENT
+================================== -->
+
+<div class="w3-padding-large" id="main">
+
+
+    <!-- HEADER -->
+
+    <header class="w3-container
+                   w3-padding-64
+                   w3-center
+                   w3-black
+                   slide-down">
+
+        <i class="fa
+                  fa-user-plus
+                  w3-jumbo
+                  w3-text-light-grey">
+        </i>
+
+        <h1 class="w3-xxxlarge">
+
+            ServiceNow Account Provisioning
+
+        </h1>
+
+        <p class="w3-large w3-text-grey">
+
+            ServiceNow Integration Lab
+
+        </p>
+
+    </header>
+
+
+    <!-- =================================
+         ACCOUNT FORM
+    ================================== -->
+
+    <div class="w3-content
+                w3-padding-32
+                slide-up"
+         id="account">
+
+
+        <div class="provision-card">
+
+
+            <h2 class="w3-text-light-grey">
+
+                <i class="fa fa-terminal"></i>
+
+                Create ServiceNow Account
+
+            </h2>
+
+
+            <p class="w3-text-grey">
+
+                Provision a user account through the
+                ServiceNow Scripted REST API.
+
+            </p>
+
+
+            <form id="userForm">
+
+
+                <!-- =====================
+                     CONNECTION
+                ====================== -->
+
+                <h3 class="section-title">
+
+                    ServiceNow Connection
+
+                </h3>
+
+
+                <p class="section-description">
+
+                    Authentication information for the
+                    ServiceNow integration account.
+
+                </p>
+
+
+                <label for="instance">
+
+                    ServiceNow Instance
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="text"
+                    id="instance"
+                    value="https://dev411791.service-now.com"
+                    required
+                >
+
+
+                <label for="apiUsername">
+
+                    ServiceNow API Username
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="text"
+                    id="apiUsername"
+                    value="github.api"
+                    autocomplete="username"
+                    required
+                >
+
+
+                <label for="apiPassword">
+
+                    ServiceNow API Password
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="password"
+                    id="apiPassword"
+                    autocomplete="current-password"
+                    placeholder="Integration account password"
+                    required
+                >
+
+
+                <hr class="divider">
+
+
+                <!-- =====================
+                     NEW USER
+                ====================== -->
+
+                <h3 class="section-title">
+
+                    New User
+
+                </h3>
+
+
+                <p class="section-description">
+
+                    Enter the information for the new
+                    ServiceNow account.
+
+                </p>
+
+
+                <label for="username">
+
+                    Username
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="text"
+                    id="username"
+                    placeholder="jsmith"
+                    required
+                >
+
+
+                <label for="firstName">
+
+                    First Name
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="text"
+                    id="firstName"
+                    placeholder="John"
+                    required
+                >
+
+
+                <label for="lastName">
+
+                    Last Name
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="text"
+                    id="lastName"
+                    placeholder="Smith"
+                    required
+                >
+
+
+                <label for="email">
+
+                    Email
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    placeholder="john.smith@example.com"
+                    required
+                >
+
+
+                <label for="tempPassword">
+
+                    Temporary Password
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="password"
+                    id="tempPassword"
+                    autocomplete="new-password"
+                    placeholder="Temporary password"
+                    required
+                >
+
+
+                <label for="confirmPassword">
+
+                    Confirm Temporary Password
+
+                </label>
+
+
+                <input
+                    class="form-input"
+                    type="password"
+                    id="confirmPassword"
+                    autocomplete="new-password"
+                    placeholder="Re-enter temporary password"
+                    required
+                >
+
+
+                <!-- CREATE BUTTON -->
+
+                <button
+                    type="submit"
+                    class="w3-button
+                           w3-light-grey
+                           create-button">
+
+                    <i class="fa fa-user-plus"></i>
+
+                    &nbsp; Create ServiceNow User
+
+                </button>
+
+
+            </form>
+
+
+            <!-- RESULT -->
+
+            <div id="result">
+
+                Waiting for request...
+
+            </div>
+
+
+            <div class="security-note">
+
+                <i class="fa fa-lock"></i>
+
+                This page is part of a ServiceNow
+                development and integration lab.
+
+            </div>
+
+
+            <!-- BACK TO INDEX -->
+
+            <a href="index.html"
+               class="w3-button
+                      w3-dark-grey
+                      back-button">
+
+                <i class="fa fa-arrow-left"></i>
+
+                &nbsp; Back to Portfolio
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="w3-content
+                   w3-padding-64
+                   w3-text-grey
+                   w3-center">
+
+        <p>
+
+            Omar SantosColón &copy; 2026
+
+            &nbsp; | &nbsp;
+
+            ServiceNow Integration Lab
+
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+<!-- =================================
+     KEEP EXISTING WORKING JAVASCRIPT
+================================== -->
+
 <script src="app.js"></script>
 
+
 </body>
+
 </html>
