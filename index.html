@@ -206,17 +206,59 @@
     </div><br>
     
     <p>Send a direct message:</p>
-    <form action="Contact.html" method="GET">
-      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="email" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16 w3-dark-grey" type="text" placeholder="Message" required name="Message"></p>
-      <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </button>
-      </p>
-    </form>
+    <<form
+  action="https://formspree.io/f/mvkgbjob"
+  method="POST"
+  id="contactForm">
+
+  <p>
+    <input
+      class="w3-input w3-padding-16 w3-dark-grey"
+      type="text"
+      placeholder="Name"
+      name="name"
+      required>
+  </p>
+
+  <p>
+    <input
+      class="w3-input w3-padding-16 w3-dark-grey"
+      type="email"
+      placeholder="Email"
+      name="email"
+      required>
+  </p>
+
+  <p>
+    <input
+      class="w3-input w3-padding-16 w3-dark-grey"
+      type="text"
+      placeholder="Subject"
+      name="subject"
+      required>
+  </p>
+
+  <p>
+    <textarea
+      class="w3-input w3-padding-16 w3-dark-grey"
+      placeholder="Message"
+      name="message"
+      rows="6"
+      required></textarea>
+  </p>
+
+  <p>
+    <button
+      class="w3-button w3-light-grey w3-padding-large"
+      type="submit">
+
+      <i class="fa fa-paper-plane"></i>
+      SEND MESSAGE
+
+    </button>
+  </p>
+
+</form>
   </div>
   
   <!-- Footer -->
