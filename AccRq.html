@@ -34,27 +34,6 @@
         }
 
         /* -----------------------------
-           Sidebar
-        ----------------------------- */
-
-        .w3-sidebar {
-            width: 120px;
-            background: #111;
-        }
-
-        #main {
-            margin-left: 120px;
-        }
-
-        @media only screen and (max-width: 600px) {
-
-            #main {
-                margin-left: 0;
-            }
-
-        }
-
-        /* -----------------------------
            Page animation
         ----------------------------- */
 
@@ -220,16 +199,24 @@
             transform: translateY(-2px);
         }
 
-        .back-button {
+        .navigation-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
 
-            display: inline-block;
+.nav-button {
+    flex: 1;
+    min-width: 190px;
+    padding: 12px 18px;
+    text-decoration: none;
+    transition: transform .2s;
+}
 
-            margin-top: 25px;
-
-            text-decoration: none;
-
-            transition: transform .2s;
-        }
+.nav-button:hover {
+    transform: translateY(-2px);
+}
 
         .back-button:hover {
 
@@ -288,55 +275,6 @@
 <body class="w3-black">
 
 
-<!-- =================================
-     DESKTOP SIDEBAR
-================================== -->
-
-<nav class="w3-sidebar
-            w3-bar-block
-            w3-small
-            w3-hide-small
-            w3-center">
-
-    <a href="index.html"
-       class="w3-bar-item
-              w3-button
-              w3-padding-large
-              w3-hover-black">
-
-        <i class="fa fa-home w3-xxlarge"></i>
-
-        <p>HOME</p>
-
-    </a>
-
-
-    <a href="#account"
-       class="w3-bar-item
-              w3-button
-              w3-padding-large
-              w3-black">
-
-        <i class="fa fa-user-plus w3-xxlarge"></i>
-
-        <p>ACCOUNT</p>
-
-    </a>
-
-
-    <a href="https://dev411791.service-now.com/login.do"
-       class="w3-bar-item
-              w3-button
-              w3-padding-large
-              w3-hover-black">
-
-        <i class="fa fa-cloud w3-xxlarge"></i>
-
-        <p>SERVICENOW</p>
-
-    </a>
-
-</nav>
 
 
 <!-- =================================
@@ -683,16 +621,30 @@
 
             <!-- BACK TO INDEX -->
 
-            <a href="index.html"
-               class="w3-button
-                      w3-dark-grey
-                      back-button">
+           <div class="navigation-buttons">
 
-                <i class="fa fa-arrow-left"></i>
+    <a href="index.html"
+       class="w3-button w3-dark-grey nav-button">
 
-                &nbsp; Back to Portfolio
+        <i class="fa fa-arrow-left"></i>
 
-            </a>
+        &nbsp; Back to Portfolio
+
+    </a>
+
+
+    <a href="https://dev411791.service-now.com/login.do"
+       class="w3-button w3-light-grey nav-button"
+       target="_blank"
+       rel="noopener noreferrer">
+
+        <i class="fa fa-cloud"></i>
+
+        &nbsp; ServiceNow
+
+        <i class="fa fa-arrow-right"></i>
+
+    </a>
 
 
         </div>
