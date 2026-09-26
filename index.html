@@ -71,7 +71,35 @@
       box-shadow: 0 10px 20px rgba(255, 255, 255, 0.08);
       background-color: #2a2a2a;
     }
+    /* Keep Request Account and ServiceNow cards level */
+.project-row {
+    display: flex;
+    align-items: stretch;
+}
+
+.project-row .w3-col {
+    display: flex;
+}
+
+.project-row .portfolio-card {
+    width: 100%;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .project-row {
+        display: block;
+    }
+
+    .project-row .w3-col {
+        display: block;
+    }
+}
   </style>
+  
 </head>
 <body class="w3-black">
 
@@ -148,7 +176,7 @@
     <hr style="width:200px" class="w3-opacity">
     
     <!-- Grid for main portfolio pathways -->
-    <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-row-padding w3-section project-row" style="margin:0 -16px">
       <!-- Card 1: Resume -->
       <div class="w3-col m4 s12 w3-margin-bottom">
         <a href="resume.html" class="portfolio-card w3-container w3-padding-24 w3-center">
