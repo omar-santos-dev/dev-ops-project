@@ -148,14 +148,26 @@
             placeholder="john.smith@example.com"
             required
         >
-        <label for="newUserPassword">
-            Initial Password
+        <label for="tempPassword">
+            Temporary Password
         </label>
         
         <input
             type="password"
-            id="newUserPassword"
-            placeholder="Initial password"
+            id="tempPassword"
+            placeholder="Enter temporary password"
+            autocomplete="new-password"
+            required
+        />
+
+        <label for="confirmPassword">
+            Confirm Temporary Password
+        </label>
+        
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm temporary password"
             autocomplete="new-password"
             required
         />
