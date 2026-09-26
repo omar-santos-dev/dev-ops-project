@@ -22,10 +22,6 @@
             box-shadow: 0 3px 12px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            margin-top: 0;
-        }
-
         label {
             display: block;
             margin-top: 15px;
@@ -61,40 +57,31 @@
     <h1>ServiceNow Account Provisioning</h1>
 
     <p>
-        Lab interface for creating a user in a ServiceNow PDI.
+        Create a ServiceNow account with a temporary password.
     </p>
 
     <form id="userForm">
 
         <h2>ServiceNow Connection</h2>
 
-        <label for="instance">
-            ServiceNow Instance
-        </label>
-
+        <label for="instance">ServiceNow Instance</label>
         <input
             type="text"
             id="instance"
             value="https://dev411791.service-now.com"
-            placeholder="https://dev411791.service-now.com"
             required
         >
 
-        <label for="apiUsername">
-            ServiceNow Username
-        </label>
-
+        <label for="apiUsername">ServiceNow API Username</label>
         <input
             type="text"
             id="apiUsername"
+            value="github.api"
             autocomplete="username"
             required
         >
 
-        <label for="apiPassword">
-            ServiceNow Password
-        </label>
-
+        <label for="apiPassword">ServiceNow API Password</label>
         <input
             type="password"
             id="apiPassword"
@@ -102,13 +89,9 @@
             required
         >
 
-
         <h2>New User</h2>
 
-        <label for="username">
-            Username
-        </label>
-
+        <label for="username">Username</label>
         <input
             type="text"
             id="username"
@@ -116,10 +99,7 @@
             required
         >
 
-        <label for="firstName">
-            First Name
-        </label>
-
+        <label for="firstName">First Name</label>
         <input
             type="text"
             id="firstName"
@@ -127,10 +107,7 @@
             required
         >
 
-        <label for="lastName">
-            Last Name
-        </label>
-
+        <label for="lastName">Last Name</label>
         <input
             type="text"
             id="lastName"
@@ -138,39 +115,29 @@
             required
         >
 
-        <label for="email">
-            Email
-        </label>
-
+        <label for="email">Email</label>
         <input
             type="email"
             id="email"
             placeholder="john.smith@example.com"
             required
         >
-        <label for="tempPassword">
-            Temporary Password
-        </label>
-        
+
+        <label for="tempPassword">Temporary Password</label>
         <input
             type="password"
             id="tempPassword"
-            placeholder="Enter temporary password"
             autocomplete="new-password"
             required
-        />
+        >
 
-        <label for="confirmPassword">
-            Confirm Temporary Password
-        </label>
-        
+        <label for="confirmPassword">Confirm Temporary Password</label>
         <input
             type="password"
             id="confirmPassword"
-            placeholder="Confirm temporary password"
             autocomplete="new-password"
             required
-        />
+        >
 
         <button type="submit">
             Create ServiceNow User
