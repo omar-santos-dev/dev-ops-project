@@ -1,1 +1,859 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Omar Santos Colón | Resume</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- For offline hosting later, download these assets and serve them locally. -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #000000;
+    }
+
+    /* Header animation */
+    .slide-down {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+      animation: slideDownOnLoad 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownOnLoad {
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Section scroll animation */
+    .scroll-slide {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-slide.active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Lighter headings */
+    .w3-jumbo {
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .w3-text-light-grey {
+      font-weight: 400;
+    }
+
+    /* Horizontal navigation */
+    .resume-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 16px;
+      background: rgba(17, 17, 17, 0.97);
+      border-top: 1px solid #2f2f2f;
+      border-bottom: 1px solid #2f2f2f;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .resume-nav a {
+      display: inline-block;
+      margin: 4px 6px;
+      padding: 8px 10px;
+      color: #bdbdbd;
+      font-size: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .resume-nav a:hover {
+      color: #ffffff;
+      background: #2a2a2a;
+    }
+
+    /* Summary */
+    .summary-box {
+      padding: 22px;
+      color: #d9eaff;
+      background: #16283d;
+      border-left: 5px solid #4a90d9;
+      line-height: 1.7;
+    }
+
+    /* Resume cards */
+    .resume-card {
+      height: 100%;
+      padding: 24px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+    }
+
+    .resume-card:hover {
+      background: #242424;
+    }
+
+    .resume-card h3,
+    .resume-card h4 {
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .resume-card h3 {
+      margin-top: 0;
+    }
+
+    .resume-card p,
+    .resume-card li {
+      color: #bdbdbd;
+      line-height: 1.6;
+    }
+
+    .resume-card ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .resume-card li {
+      margin-bottom: 9px;
+    }
+
+    .resume-label {
+      margin-bottom: 7px;
+      color: #9ecbff;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    /* Skills */
+    .skill-group {
+      margin-bottom: 22px;
+    }
+
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-group h4 {
+      margin-bottom: 10px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      padding: 6px 10px;
+      color: #d9eaff;
+      background: #292929;
+      border: 1px solid #444;
+      font-size: 12px;
+    }
+
+    /* Experience timeline */
+    .experience-entry {
+      position: relative;
+      padding: 0 0 30px 26px;
+      border-left: 2px solid #4a90d9;
+    }
+
+    .experience-entry:last-child {
+      padding-bottom: 0;
+    }
+
+    .experience-entry::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: -7px;
+      width: 12px;
+      height: 12px;
+      background: #9ecbff;
+      border-radius: 50%;
+    }
+
+    .experience-entry h3 {
+      margin: 0 0 4px;
+    }
+
+    .experience-entry h4 {
+      margin: 0 0 12px;
+      color: #bdbdbd;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    /* Contact and actions */
+    .contact-link {
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .contact-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .action-button {
+      display: inline-block;
+      margin: 8px 4px;
+      padding: 12px 18px;
+      color: #111;
+      background: #e5e5e5;
+      border: 1px solid #777;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #ffffff;
+    }
+
+    .action-button-dark {
+      color: #ffffff;
+      background: #333;
+      border-color: #555;
+    }
+
+    .action-button-dark:hover {
+      background: #444;
+    }
+
+    .clearance-tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 10px;
+      color: #111;
+      background: #f5cf70;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    /* Print-friendly version */
+    @media print {
+      body {
+        color: #000000 !important;
+        background: #ffffff !important;
+      }
+
+      .resume-nav,
+      .action-button,
+      .no-print {
+        display: none !important;
+      }
+
+      .w3-black,
+      .resume-card,
+      .summary-box {
+        color: #000000 !important;
+        background: #ffffff !important;
+        border-color: #cccccc !important;
+      }
+
+      .w3-text-light-grey,
+      .resume-card h3,
+      .resume-card h4,
+      .resume-card p,
+      .resume-card li,
+      .summary-box,
+      .w3-text-grey {
+        color: #000000 !important;
+      }
+
+      .skill-tag {
+        color: #000000 !important;
+        background: #f5f5f5 !important;
+        border-color: #cccccc !important;
+      }
+
+      .scroll-slide {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      .resume-nav {
+        padding: 8px 4px;
+      }
+
+      .resume-nav a {
+        margin: 2px;
+        padding: 7px 5px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body class="w3-black">
+
+  <!-- Header -->
+  <header class="w3-container w3-padding-32 w3-center w3-black slide-down" id="home">
+    <img
+      src="profile.jpg"
+      alt="Omar Santos Colón"
+      class="w3-image w3-circle w3-margin-bottom"
+      style="width:150px; height:150px; object-fit:cover; border:2px solid #333;"
+    >
+
+    <h1 class="w3-jumbo">Omar Santos Colón</h1>
+
+    <p class="w3-large w3-text-grey">
+      Systems Administrator · Communications Infrastructure · IT Operations
+    </p>
+
+    <p class="w3-text-grey">
+      Orlando, FL
+      &nbsp; | &nbsp;
+      <a class="contact-link" href="tel:+13109068170">
+        <i class="fa fa-phone"></i> (310) 906-8170
+      </a>
+      &nbsp; | &nbsp;
+      <a class="contact-link" href="mailto:omar.santos0420@proton.me">
+        <i class="fa fa-envelope"></i> omar.santos0420@proton.me
+      </a>
+    </p>
+
+    <span class="clearance-tag">
+      Active Top Secret Security Clearance
+    </span>
+
+    <p class="w3-text-grey">
+      CompTIA Security+ CE · Valid through April 2027
+    </p>
+
+    <div class="no-print">
+      <button class="action-button" onclick="window.print()">
+        <i class="fa fa-print"></i> Print / Save as PDF
+      </button>
+
+      <a
+        class="action-button action-button-dark"
+        href="index.html"
+      >
+        <i class="fa fa-arrow-left"></i> Return to Portfolio
+      </a>
+    </div>
+  </header>
+
+  <!-- Horizontal navigation -->
+  <nav class="resume-nav">
+    <a href="#summary">Summary</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+  </nav>
+
+  <!-- Main Resume Content -->
+  <main class="w3-padding-large">
+
+    <!-- Summary -->
+    <section class="w3-content w3-padding-64 scroll-slide" id="summary">
+      <h2 class="w3-text-light-grey">Professional Summary</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="summary-box">
+        Systems Administrator and Communications Infrastructure professional
+        with 18+ years of experience supporting secure DoD enterprise,
+        tactical, and SATCOM environments across the U.S. Army and U.S. Marine
+        Corps. Experienced administering Windows, Linux, and virtualized
+        environments supporting mission-critical operations and 1,000+ users.
+        Skilled in VMware virtualization, Active Directory administration,
+        STIG and IAVA remediation, network troubleshooting, systems deployment,
+        and Tier 2 technical escalation support. Proven ability to maintain
+        operational readiness, troubleshoot complex infrastructure issues, and
+        support secure multi-domain communications environments in high-tempo
+        operational settings. Actively developing further technical capability
+        through a self-managed enterprise homelab focused on virtualization,
+        networking, Linux administration, automation, and infrastructure testing.
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="w3-content w3-padding-64 scroll-slide" id="skills">
+      <h2 class="w3-text-light-grey">Core Technical Skills</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding" style="margin:0 -16px">
+
+        <div class="w3-col m6 s12 w3-margin-bottom">
+          <div class="resume-card">
+
+            <div class="skill-group">
+              <h4>Systems Administration and Infrastructure</h4>
+
+              <div class="skill-tags">
+                <span class="skill-tag">Windows 10 / 11</span>
+                <span class="skill-tag">Windows Server 2016 / 2019</span>
+                <span class="skill-tag">Ubuntu</span>
+                <span class="skill-tag">RHEL</span>
+                <span class="skill-tag">Active Directory</span>
+                <span class="skill-tag">Entra ID</span>
+                <span class="skill-tag">Group Policy</span>
+                <span class="skill-tag">Microsoft 365</span>
+                <span class="skill-tag">VMware vSphere / ESXi</span>
+                <span class="skill-tag">Hyper-V</span>
+                <span class="skill-tag">Remote Administration</span>
+                <span class="skill-tag">Endpoint Provisioning</span>
+                <span class="skill-tag">System Imaging</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Automation and Platforms</h4>
+
+              <div class="skill-tags">
+                <span class="skill-tag">PowerShell</span>
+                <span class="skill-tag">Bash Scripting</span>
+                <span class="skill-tag">System Administration Automation</span>
+                <span class="skill-tag">ServiceNow</span>
+                <span class="skill-tag">AESMP</span>
+                <span class="skill-tag">VMware vCenter</span>
+                <span class="skill-tag">Dameware</span>
+                <span class="skill-tag">Microsoft Teams</span>
+                <span class="skill-tag">Jira Familiarity</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="w3-col m6 s12 w3-margin-bottom">
+          <div class="resume-card">
+
+            <div class="skill-group">
+              <h4>Networking and Communications</h4>
+
+              <div class="skill-tags">
+                <span class="skill-tag">TCP/IP</span>
+                <span class="skill-tag">DNS / DHCP</span>
+                <span class="skill-tag">VLAN Fundamentals</span>
+                <span class="skill-tag">VPN Troubleshooting</span>
+                <span class="skill-tag">Cisco Networking Fundamentals</span>
+                <span class="skill-tag">Router and Switch Support</span>
+                <span class="skill-tag">SATCOM Systems</span>
+                <span class="skill-tag">RF Communications</span>
+                <span class="skill-tag">HF / VHF / UHF / SHF</span>
+                <span class="skill-tag">Secure Multi-Domain Communications</span>
+              </div>
+            </div>
+
+            <div class="skill-group">
+              <h4>Security, Compliance, and IT Operations</h4>
+
+              <div class="skill-tags">
+                <span class="skill-tag">DISA STIG Implementation</span>
+                <span class="skill-tag">IAVA Remediation</span>
+                <span class="skill-tag">RMF Compliance Support</span>
+                <span class="skill-tag">Vulnerability Management</span>
+                <span class="skill-tag">Security Hardening</span>
+                <span class="skill-tag">COMSEC / TRANSEC Awareness</span>
+                <span class="skill-tag">Tier 1 / Tier 2 Support</span>
+                <span class="skill-tag">Incident Troubleshooting</span>
+                <span class="skill-tag">SLA Compliance</span>
+                <span class="skill-tag">Asset Lifecycle Management</span>
+                <span class="skill-tag">SOP Development</span>
+                <span class="skill-tag">Escalation Management</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="w3-content w3-padding-64 scroll-slide" id="experience">
+      <h2 class="w3-text-light-grey">Professional Experience</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="resume-card">
+
+        <!-- Peraton -->
+        <div class="experience-entry">
+          <p class="resume-label">June 2026 – Present</p>
+
+          <h3>Active Directory System Administrator</h3>
+
+          <h4>Peraton · MacDill AFB, Tampa, FL</h4>
+
+          <ul>
+            <li>
+              Manage enterprise directory services, including Active Directory
+              and Entra ID, advanced Group Policy Object design, schema updates,
+              and endpoint policy compliance.
+            </li>
+
+            <li>
+              Configure and optimize enterprise-scale VMware virtual
+              environments; monitor and tune virtualized server infrastructure,
+              hypervisors, and resource allocation.
+            </li>
+
+            <li>
+              Author and standardize Standard Operating Procedures, technical
+              blueprints, and Tier 1 / Tier 2 escalation workflows to support
+              repeatable and efficient operations.
+            </li>
+
+            <li>
+              Design and maintain continuity of operations, disaster recovery,
+              and failover procedures supporting critical mission systems.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Army System Administrator -->
+        <div class="experience-entry">
+          <p class="resume-label">December 2024 – June 2026</p>
+
+          <h3>System Administrator</h3>
+
+          <h4>U.S. Department of the Army · Fort Drum, NY</h4>
+
+          <ul>
+            <li>
+              Administered enterprise endpoint infrastructure supporting more
+              than 300 end-user systems across secure DoD network environments.
+            </li>
+
+            <li>
+              Delivered onsite and remote operations and maintenance support
+              using remote administration tools and in-person troubleshooting.
+            </li>
+
+            <li>
+              Troubleshot and remediated endpoint, infrastructure, and network
+              connectivity issues across secure enterprise environments.
+            </li>
+
+            <li>
+              Supported endpoint deployment and configuration management using
+              standardized DoD system baselines.
+            </li>
+
+            <li>
+              Administered Active Directory account management, directory
+              services updates, and endpoint policy compliance.
+            </li>
+
+            <li>
+              Managed VMware virtual infrastructure supporting enterprise
+              virtual servers and system resource utilization.
+            </li>
+
+            <li>
+              Developed SOPs, onboarding documentation, and troubleshooting
+              guides supporting repeatable operational processes.
+            </li>
+
+            <li>
+              Supported continuity of operations readiness and operational
+              availability for critical user systems.
+            </li>
+          </ul>
+        </div>
+
+        <!-- ISSO -->
+        <div class="experience-entry">
+          <p class="resume-label">July 2023 – December 2024</p>
+
+          <h3>Information System Security Officer</h3>
+
+          <h4>U.S. Army Reserve · Fort Drum, NY</h4>
+
+          <ul>
+            <li>
+              Provided Tier 1 and Tier 2 systems administration and technical
+              support for more than 300 users across multiple secure enclaves.
+            </li>
+
+            <li>
+              Administered Active Directory account provisioning, permissions
+              management, Group Policy enforcement, and user lifecycle support.
+            </li>
+
+            <li>
+              Maintained IAVA compliance through structured vulnerability
+              remediation, patch management, and DISA STIG implementation.
+            </li>
+
+            <li>
+              Coordinated technical escalations with NETCOM, vendors, and
+              higher-tier support organizations to resolve infrastructure and
+              network issues.
+            </li>
+
+            <li>
+              Maintained workstation operational readiness through proactive
+              troubleshooting, maintenance, and configuration control.
+            </li>
+
+            <li>
+              Supported asset lifecycle management, accountability processes,
+              technical documentation, SOPs, and remediation procedures.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Signal Support Chief -->
+        <div class="experience-entry">
+          <p class="resume-label">March 2018 – Present</p>
+
+          <h3>Signal Support Chief</h3>
+
+          <h4>U.S. Army Reserve · Fort Drum, NY</h4>
+
+          <ul>
+            <li>
+              Serve as the senior technical escalation point for tactical IT
+              infrastructure, secure communications systems, and
+              network-connected equipment.
+            </li>
+
+            <li>
+              Deliver technical and operational training to more than
+              56 personnel, improving troubleshooting capability and reducing
+              support escalations.
+            </li>
+
+            <li>
+              Remediated more than 50 security vulnerabilities through
+              structured patch management and DISA STIG implementation.
+            </li>
+
+            <li>
+              Supported secure communications and networking environments using
+              VHF/UHF systems, tactical network equipment, and secure
+              transmission systems.
+            </li>
+
+            <li>
+              Managed operational readiness and accountability for more than
+              $750,000 in communications and IT equipment.
+            </li>
+
+            <li>
+              Developed technical documentation, troubleshooting workflows, and
+              maintenance procedures supporting repeatable infrastructure
+              operations.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Marine Corps -->
+        <div class="experience-entry">
+          <p class="resume-label">June 2007 – March 2018</p>
+
+          <h3>Transmission Communications Chief</h3>
+
+          <h4>U.S. Marine Corps · Camp Pendleton, CA · Havelock, NC · Okinawa, Japan</h4>
+
+          <ul>
+            <li>
+              Supported enterprise LAN and communications environments serving
+              more than 1,300 users across operational military environments.
+            </li>
+
+            <li>
+              Performed operations and maintenance support for network
+              infrastructure, SATCOM systems, radio systems, and
+              telecommunications equipment.
+            </li>
+
+            <li>
+              Supported RF, baseband, and secure communications systems using
+              HF, VHF, UHF, SHF, and SATCOM technologies.
+            </li>
+
+            <li>
+              Assisted with troubleshooting and operational support for tactical
+              network systems, routers, switches, and transmission equipment.
+            </li>
+
+            <li>
+              Maintained compliance with DoD communications security standards,
+              COMSEC requirements, and secure network procedures.
+            </li>
+
+            <li>
+              Supported escalation workflows, issue documentation, and
+              operational continuity across mission-critical communications
+              systems.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="w3-content w3-padding-64 scroll-slide" id="education">
+      <h2 class="w3-text-light-grey">Education and Certifications</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding" style="margin:0 -16px">
+
+        <div class="w3-col m6 s12 w3-margin-bottom">
+          <div class="resume-card">
+            <p class="resume-label">Education</p>
+
+            <h3>Associate Degree in Computer Information Technology</h3>
+
+            <p>
+              Jefferson Community College<br>
+              Watertown, NY<br>
+              Expected Completion: 2026
+            </p>
+          </div>
+        </div>
+
+        <div class="w3-col m6 s12 w3-margin-bottom">
+          <div class="resume-card">
+            <p class="resume-label">Certification</p>
+
+            <h3>CompTIA Security+ CE</h3>
+
+            <p>
+              Valid through April 2027
+            </p>
+
+            <p class="resume-label">Security Clearance</p>
+
+            <h3>Active Top Secret Security Clearance</h3>
+
+            <p>
+              Confirm exact wording and release approval before using this
+              statement in a public-facing version.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Projects -->
+    <section class="w3-content w3-padding-64 scroll-slide" id="projects">
+      <h2 class="w3-text-light-grey">Technical Projects</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="resume-card">
+        <p class="resume-label">HomeLab Infrastructure</p>
+
+        <h3>Virtualization, Storage, Automation, and Network Testing</h3>
+
+        <ul>
+          <li>
+            Built an enterprise-style virtualized lab environment using VMware
+            and Windows/Linux operating systems.
+          </li>
+
+          <li>
+            Configured Active Directory, DNS, DHCP, and VPN services within
+            segmented virtual network environments.
+          </li>
+
+          <li>
+            Implemented WireGuard VPN for secure remote connectivity and
+            administrative access.
+          </li>
+
+          <li>
+            Deployed TrueNAS storage supporting centralized storage and
+            backup operations.
+          </li>
+
+          <li>
+            Practiced Linux system administration, Bash scripting, security
+            hardening, infrastructure troubleshooting, and configuration
+            validation.
+          </li>
+
+          <li>
+            Developed PowerShell scripts supporting workstation administration
+            and automation tasks.
+          </li>
+
+          <li>
+            Tested virtualization, system imaging, patch management, backups,
+            and network configuration scenarios.
+          </li>
+        </ul>
+
+        <p class="w3-center">
+          <a
+            class="action-button action-button-dark"
+            href="https://omar-santos-dev.github.io/dev-ops-project/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa fa-github"></i> View Project Portfolio
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-64 w3-text-grey w3-center">
+      <p class="w3-small">
+        Omar Santos Colón · Resume Website
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    const observerOptions = {
+      root: null,
+      threshold: 0.10,
+      rootMargin: "0px 0px -40px 0px"
+    };
+
+    const slideObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".scroll-slide").forEach((section) => {
+      slideObserver.observe(section);
+    });
+  </script>
+
+</body>
+</html>
+```
