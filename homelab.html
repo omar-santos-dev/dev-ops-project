@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homelab Operations Center</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- For a fully local/offline deployment later, download these assets
+       and host them locally instead of relying on external CDN links. -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Sidebar */
+    .w3-sidebar {
+      width: 120px;
+      background: #111;
+    }
+
+    #main {
+      margin-left: 120px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      #main {
+        margin-left: 0;
+      }
+    }
+
+    /* Header animation */
+    .slide-down {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+      animation: slideDownOnLoad 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownOnLoad {
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Scroll animation */
+    .scroll-slide {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-slide.active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Dashboard cards */
+    .portal-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 260px;
+      padding: 24px;
+      color: white;
+      text-decoration: none;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-5px);
+      background-color: #292929;
+      box-shadow: 0 10px 22px rgba(255, 255, 255, 0.10);
+    }
+
+    .portal-card h4 {
+      margin-top: 14px;
+      margin-bottom: 8px;
+    }
+
+    /* Local logo images */
+    .brand-logo {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .brand-logo-small {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .service-label {
+      margin-top: 8px;
+      color: #9ecbff;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .service-description {
+      color: #bdbdbd;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    /* Centered status labels */
+    .status-wrap {
+      width: 100%;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 2px;
+      color: #111;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-align: center;
+    }
+
+    .status-normal {
+      background: #8fd694;
+    }
+
+    .status-isolated {
+      background: #f5cf70;
+    }
+
+    .status-external {
+      background: #8ecae6;
+    }
+
+    .status-optional {
+      background: #d6d6d6;
+    }
+
+    .notice-box {
+      padding: 16px;
+      color: #d9eaff;
+      background: #16283d;
+      border-left: 5px solid #4a90d9;
+      line-height: 1.55;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px;
+      color: white;
+      background: #1b1b1b;
+      border: 1px solid #444;
+    }
+
+    .map-icon {
+      display: block;
+      margin: 0 auto;
+      color: #ffffff;
+      font-size: 78px;
+    }
+
+    .hidden-card {
+      display: none !important;
+    }
+
+    /* Make Optional Services cards equal height */
+    .optional-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    .optional-row .service-card {
+      display: flex;
+      float: none;
+    }
+
+    .optional-row .portal-card {
+      width: 100%;
+      min-height: 285px;
+      height: 100%;
+    }
+
+    /* Mobile behavior */
+    @media only screen and (max-width: 600px) {
+      .optional-row {
+        display: block;
+      }
+
+      .optional-row .service-card {
+        display: block;
+      }
+
+      .optional-row .portal-card {
+        min-height: 245px;
+      }
+    }
+  </style>
+</head>
+
+<body class="w3-black">
+
+  <!-- Sidebar navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+
+    <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-black">
+      <i class="fa fa-home w3-xxlarge"></i>
+      <p>HOME</p>
+    </a>
+
+    <a href="#core" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-server w3-xxlarge"></i>
+      <p>CORE</p>
+    </a>
+
+    <a href="#servicenow" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-cloud w3-xxlarge"></i>
+      <p>SNOW</p>
+    </a>
+
+    <a href="#meshtastic" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-signal w3-xxlarge"></i>
+      <p>MESH</p>
+    </a>
+
+    <a href="#optional" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+      <i class="fa fa-cubes w3-xxlarge"></i>
+      <p>TOOLS</p>
+    </a>
+
+  </nav>
+
+  <!-- Mobile navigation -->
+  <div class="w3-top w3-hide-large w3-hide-medium">
+    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+      <a href="#home" class="w3-bar-item w3-button" style="width:20% !important">HOME</a>
+      <a href="#core" class="w3-bar-item w3-button" style="width:20% !important">CORE</a>
+      <a href="#servicenow" class="w3-bar-item w3-button" style="width:20% !important">SNOW</a>
+      <a href="#meshtastic" class="w3-bar-item w3-button" style="width:20% !important">MESH</a>
+      <a href="#optional" class="w3-bar-item w3-button" style="width:20% !important">TOOLS</a>
+    </div>
+  </div>
+
+  <!-- Main page -->
+  <div class="w3-padding-large" id="main">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-32 w3-center w3-black slide-down" id="home">
+      <i class="fa fa-server w3-xxxlarge w3-margin-bottom"></i>
+
+      <h1 class="w3-jumbo">Homelab Operations Center</h1>
+
+      <p class="w3-large w3-text-grey">
+        Proxmox · TrueNAS · ServiceNow · Docker · Meshtastic
+      </p>
+    </header>
+
+    <!-- Overview -->
+    <section class="w3-content w3-justify w3-text-grey w3-padding-64 scroll-slide">
+      <h2 class="w3-text-light-grey">Environment Overview</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="notice-box">
+        <strong>Architecture:</strong>
+        The normal homelab environment hosts infrastructure, storage,
+        ServiceNow resources, Docker projects, and supporting services.
+        The Meshtastic environment remains Internet-isolated and restricted
+        from the normal homelab environment except for approved local access.
+      </div>
+
+      <br>
+
+      <input
+        id="serviceSearch"
+        class="search-box"
+        type="search"
+        placeholder="Search systems, services, or functions..."
+        aria-label="Search systems and services"
+      >
+    </section>
+
+    <!-- Core Infrastructure -->
+    <section class="w3-padding-32 w3-content scroll-slide" id="core">
+      <h2 class="w3-text-light-grey">Core Infrastructure</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding w3-section" style="margin:0 -16px">
+
+        <!-- Proxmox -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="proxmox pve virtualization lxc container virtual machine storage">
+          <a
+            href="https://proxmox.lab.home:8006"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/proxmox.svg"
+              alt="Proxmox logo"
+              class="brand-logo"
+            >
+
+            <h4>Proxmox VE</h4>
+
+            <p class="service-label">Virtualization Management</p>
+
+            <p class="service-description">
+              Hosts virtual machines, Linux containers, snapshots, backups,
+              and core homelab infrastructure workloads.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-normal">NORMAL HOMELAB</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- TrueNAS -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="truenas zfs nas smb nfs backup snapshot replication storage">
+          <a
+            href="https://truenas.lab.home"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/truenas.svg"
+              alt="TrueNAS logo"
+              class="brand-logo"
+            >
+
+            <h4>TrueNAS</h4>
+
+            <p class="service-label">Storage and Backup Management</p>
+
+            <p class="service-description">
+              Central ZFS storage platform for file shares, backups,
+              snapshots, replication, and recovery testing.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-normal">NORMAL HOMELAB</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- GL.iNet -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="glinet openwrt router firewall gateway dhcp wifi vlan">
+          <a
+            href="http://router.lab.home"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/glinet.svg"
+              alt="GL.iNet logo"
+              class="brand-logo"
+            >
+
+            <h4>GL.iNet / OpenWrt</h4>
+
+            <p class="service-label">Router and Firewall Management</p>
+
+            <p class="service-description">
+              Provides routing, DHCP, Wi-Fi, firewall control, and network
+              segmentation for the homelab and Meshtastic environment.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-normal">NORMAL HOMELAB</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Docker Project Portal -->
+        <div class="w3-col m12 s12 w3-margin-bottom service-card"
+             data-search="docker project portal windows containers applications">
+          <a
+            href="docker-projects.html"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/docker.svg"
+              alt="Docker logo"
+              class="brand-logo"
+            >
+
+            <h4>Docker Project Portal</h4>
+
+            <p class="service-label">Containerized Lab Applications</p>
+
+            <p class="service-description">
+              Project area for Docker-based applications, container builds,
+              Compose files, documentation, and planned lab services.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-normal">NORMAL HOMELAB</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ServiceNow -->
+    <section class="w3-padding-32 w3-content scroll-slide" id="servicenow">
+      <h2 class="w3-text-light-grey">ServiceNow Lab</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding w3-section" style="margin:0 -16px">
+
+        <!-- ServiceNow PDI -->
+        <div class="w3-col m6 s12 w3-margin-bottom service-card"
+             data-search="servicenow pdi cmdb ecc queue discovery credentials">
+          <a
+            href="https://YOUR-INSTANCE.service-now.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/servicenow.svg"
+              alt="ServiceNow logo"
+              class="brand-logo"
+            >
+
+            <h4>ServiceNow PDI</h4>
+
+            <p class="service-label">ServiceNow Training Instance</p>
+
+            <p class="service-description">
+              Training environment for ServiceNow administration, CMDB,
+              Discovery concepts, account roles, catalog development,
+              UI configuration, and testing.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-external">EXTERNAL PDI</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- ServiceNow Account Provisioning -->
+        <div class="w3-col m6 s12 w3-margin-bottom service-card"
+             data-search="servicenow account provisioning request account user roles group">
+          <a
+            href="https://omar-santos-dev.github.io/dev-ops-project/AccRq.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/servicenow.svg"
+              alt="ServiceNow logo"
+              class="brand-logo"
+            >
+
+            <h4>ServiceNow Account Provisioning</h4>
+
+            <p class="service-label">Account Request Portal</p>
+
+            <p class="service-description">
+              Request and manage ServiceNow training-project accounts,
+              user access, group membership, and role assignments.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-normal">NORMAL HOMELAB</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Meshtastic -->
+    <section class="w3-padding-32 w3-content scroll-slide" id="meshtastic">
+      <h2 class="w3-text-light-grey">Meshtastic Environment</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding w3-section" style="margin:0 -16px">
+
+        <!-- Meshtastic Node -->
+        <div class="w3-col m6 s12 w3-margin-bottom service-card"
+             data-search="meshtastic mesh lora radio node iot">
+          <a
+            href="http://meshtastic-node.lab.home"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/meshtastic.svg"
+              alt="Meshtastic logo"
+              class="brand-logo"
+            >
+
+            <h4>Meshtastic Node</h4>
+
+            <p class="service-label">Local LoRa Mesh Management</p>
+
+            <p class="service-description">
+              Local Meshtastic LoRa radio node supporting mesh communication
+              and approved restricted administrative access.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-isolated">INTERNET ISOLATED</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- MeshMap -->
+        <div class="w3-col m6 s12 w3-margin-bottom service-card"
+             data-search="meshmap map meshtastic node locations mesh visualization">
+          <a
+            href="https://meshmap.net/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <i class="fa fa-map map-icon"></i>
+
+            <h4>MeshMap</h4>
+
+            <p class="service-label">Mesh Visualization and Mapping</p>
+
+            <p class="service-description">
+              View and explore Meshtastic node locations, coverage areas,
+              and mesh-related mapping information.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-isolated">MESHTASTIC SEGMENT</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Optional Services -->
+    <section class="w3-padding-32 w3-content scroll-slide" id="optional">
+      <h2 class="w3-text-light-grey">Optional Services and Resources</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <div class="w3-row-padding w3-section optional-row" style="margin:0 -16px">
+
+        <!-- Pi-hole -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="pihole pi-hole dns local names filtering">
+          <a
+            href="http://pihole.lab.home/admin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/pihole.svg"
+              alt="Pi-hole logo"
+              class="brand-logo-small"
+            >
+
+            <h4>Pi-hole</h4>
+
+            <p class="service-label">Local DNS Management</p>
+
+            <p class="service-description">
+              Optional internal DNS service for friendly names, local
+              resolution, and DNS-based filtering.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-optional">OPTIONAL SERVICE</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Nextcloud -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="nextcloud file sync photo backup private cloud storage">
+          <a
+            href="https://nextcloud.lab.home"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/nextcloud.svg"
+              alt="Nextcloud logo"
+              class="brand-logo-small"
+            >
+
+            <h4>Nextcloud</h4>
+
+            <p class="service-label">Private Cloud and File Sync</p>
+
+            <p class="service-description">
+              Optional local private cloud for synchronized files, browser
+              access, sharing, and mobile photo uploads.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-optional">OPTIONAL SERVICE</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- GitHub DevOps Project -->
+        <div class="w3-col m4 s12 w3-margin-bottom service-card"
+             data-search="github devops project source code repository automation">
+          <a
+            href="https://omar-santos-dev.github.io/dev-ops-project/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="portal-card w3-center"
+          >
+            <img
+              src="assets/logos/github.svg"
+              alt="GitHub logo"
+              class="brand-logo-small"
+            >
+
+            <h4>GitHub DevOps Project</h4>
+
+            <p class="service-label">Project Documentation and Development</p>
+
+            <p class="service-description">
+              External project site for DevOps learning, source control,
+              documentation, automation work, and development references.
+            </p>
+
+            <div class="status-wrap">
+              <span class="status status-external">EXTERNAL RESOURCE</span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-64 w3-text-grey">
+      <p class="w3-small">
+        Homelab Operations Center · Update internal DNS records, local logo
+        files, and service links before operational use.
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    /* Scroll animation */
+    const observerOptions = {
+      root: null,
+      threshold: 0.10,
+      rootMargin: "0px 0px -40px 0px"
+    };
+
+    const slideObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".scroll-slide").forEach((section) => {
+      slideObserver.observe(section);
+    });
+
+    /* Search cards */
+    const searchInput = document.getElementById("serviceSearch");
+    const serviceCards = document.querySelectorAll(".service-card");
+
+    searchInput.addEventListener("input", function () {
+      const searchText = searchInput.value.toLowerCase().trim();
+
+      serviceCards.forEach((card) => {
+        const searchValues = card.dataset.search.toLowerCase();
+
+        if (searchValues.includes(searchText)) {
+          card.classList.remove("hidden-card");
+        } else {
+          card.classList.add("hidden-card");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
