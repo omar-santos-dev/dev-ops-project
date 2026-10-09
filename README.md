@@ -43,25 +43,24 @@ A recovery-first homelab built around OpenWrt networking, TrueNAS storage, Proxm
           |                                                |
           v                                                v
  Normal Homelab Network                         Meshtastic Network
-     10.10.30.0/24                                10.10.40.0/24
+     1.0/24                                             2.0/24
  Internet allowed as needed                       Internet denied
           |                                                |
           |-- TrueNAS                                      |-- Meshtastic Node
-          |   10.10.30.15                                  |   10.10.40.60
+          |  .1.15                                         |   .2.60:3000
           |   SMB, NFS, snapshots, backups,                |
-          |   optional Nextcloud                            `-- Optional local-only
-          |                                                    Meshtastic services later
-          |
-          |-- Proxmox VE
-          |   10.10.30.10
+          |   optional Nextcloud                           |-- Project Nomad
+          |                                                |    .2.60:9446
+          |                                                |
+          |-- Proxmox VE                                   |-- Apache Service
+          |     1.10                                       |     2.60:8080
           |   |
           |   |-- Debian Discovery Test Container
           |   |-- Pi-hole Container (optional)
           |   |-- NGINX Container (optional)
-          |   `-- Other approved lab VMs and containers
-          |
+          |  
           |-- Rocky Linux 8 MID Server
-          |   10.10.30.20
+          |    1.20
           |   |
           |   `-- Outbound HTTPS to ServiceNow PDI
           |
