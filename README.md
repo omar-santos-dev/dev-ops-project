@@ -52,8 +52,8 @@ A recovery-first homelab built around OpenWrt networking, TrueNAS storage, Proxm
           |   optional Nextcloud                           |-- Project Nomad
           |                                                |    .2.60:9446
           |                                                |
-          |-- Proxmox VE                                   |-- Apache Service
-          |     1.10                                       |     2.60:8080
+          |-- Proxmox VE                                   `-- Apache Service
+          |     1.10                                           2.60:8080
           |   |
           |   |-- Debian Discovery Test Container
           |   |-- Pi-hole Container (optional)
