@@ -24,7 +24,13 @@
       --medium-gray: #b0b0b0;
     }
 
-    body, h1, h2, h3, h4, h5, h6 {
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: "Montserrat", sans-serif;
     }
 
@@ -36,46 +42,6 @@
       margin: 0;
       background: var(--page-bg);
       color: var(--text);
-    }
-
-    /* Top Header */
-    .project-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(17, 17, 17, 0.97);
-      border-bottom: 1px solid var(--panel-border);
-      backdrop-filter: blur(10px);
-    }
-
-    .project-header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      text-align: center;
-    }
-
-    .project-brand {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .project-brand-icon {
-      color: #ffffff;
-      font-size: 28px;
-    }
-
-    .project-brand h1 {
-      margin: 0;
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 400;
     }
 
     /* Main Layout */
@@ -345,19 +311,6 @@
 
 <body>
 
-  <!-- Top Header -->
-  <header class="project-header">
-    <div class="project-header-content">
-      <div class="project-brand">
-        <i class="fa fa-th project-brand-icon"></i>
-
-        <div>
-          <h1>Project Hub</h1>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <!-- Main Content -->
   <main class="page-content">
 
@@ -493,8 +446,6 @@
     >
       <i class="fa fa-home"></i> Return to GitHub
     </a>
-
-    
   </footer>
 
 </body>
