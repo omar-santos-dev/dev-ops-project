@@ -110,6 +110,49 @@
       border-radius: 3px;
     }
 
+    /* Return to Portfolio Button */
+    .action-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 8px;
+      padding: 11px 16px;
+      color: #ffffff;
+      background-color: #1e1e1e;
+      border: 1px solid #bdbdbd;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .action-button-dark {
+      color: #ffffff;
+      background-color: #1e1e1e;
+    }
+
+    .action-button:hover {
+      color: #ffffff;
+      background-color: #333333;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .action-button:focus {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    .action-button i {
+      font-size: 14px;
+    }
+
     /* Social media buttons */
     .social-button {
       display: inline-block;
@@ -127,19 +170,19 @@
     }
 
     .tiktok-button {
-      background-color: #111;
       color: #ffffff;
+      background-color: #111;
       border: 1px solid #555;
     }
 
     .instagram-button {
-      background-color: #c13584;
       color: #ffffff;
+      background-color: #c13584;
     }
 
     .facebook-button {
-      background-color: #1877f2;
       color: #ffffff;
+      background-color: #1877f2;
     }
 
     @media only screen and (max-width: 600px) {
@@ -170,7 +213,8 @@
 
       .interest-card,
       .interest-image,
-      .social-button {
+      .social-button,
+      .action-button {
         transition: none;
       }
     }
@@ -214,8 +258,6 @@
         <!-- Paddleboarding -->
         <div class="w3-col l6 m6 s12 w3-margin-bottom">
           <article class="interest-card">
-
-            <!-- Replace image path with your own image -->
             <img
               src="images/paddleboarding.jpg"
               alt="Paddleboard on calm water in Central Florida"
@@ -244,8 +286,6 @@
         <!-- Meshtastic / LoRa -->
         <div class="w3-col l6 m6 s12 w3-margin-bottom">
           <article class="interest-card">
-
-            <!-- Replace image path with your own image -->
             <img
               src="images/meshtastic-lora.jpg"
               alt="LoRa device used for off-grid mesh networking"
@@ -275,8 +315,6 @@
         <!-- 3D Printing -->
         <div class="w3-col l6 m6 s12 w3-margin-bottom">
           <article class="interest-card">
-
-            <!-- Replace image path with your own image -->
             <img
               src="images/3d-printing.jpg"
               alt="A 3D printer creating a layered object"
@@ -305,8 +343,6 @@
         <!-- Swimming -->
         <div class="w3-col l6 m6 s12 w3-margin-bottom">
           <article class="interest-card">
-
-            <!-- Replace image path with your own image -->
             <img
               src="images/swimming.jpg"
               alt="Clear blue swimming pool water"
@@ -346,9 +382,12 @@
       </p>
 
       <!-- Back to Portfolio Button -->
-     <a class="action-button action-button-dark" href="https://omar-santos-dev.github.io/dev-ops-project/" rel="noopener noreferrer">
-    <i class="fa fa-home"></i> Return to Portfolio
-  </a>
+      <a
+        class="action-button action-button-dark"
+        href="https://omar-santos-dev.github.io/dev-ops-project/">
+        <i class="fa fa-home"></i>
+        Return to Portfolio
+      </a>
 
       <!-- Social Media Buttons -->
       <div class="w3-padding-32">
