@@ -1,1 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Interests | Omar SantosColón</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /*
+      No left sidebar or top navigation.
+      Page content uses the full screen width.
+    */
+    #main {
+      margin-left: 0;
+      padding-top: 0;
+    }
+
+    /* Header load animation */
+    .slide-down {
+      opacity: 0;
+      transform: translate3d(0, -30px, 0);
+      animation: slideDownOnLoad 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownOnLoad {
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Scroll animation */
+    .scroll-slide {
+      opacity: 0;
+      transform: translate3d(0, 50px, 0);
+      transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .scroll-slide.active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Interest card styling */
+    .interest-card {
+      height: 100%;
+      overflow: hidden;
+      background-color: #1e1e1e;
+      border: 1px solid #2d2d2d;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-6px);
+      background-color: #292929;
+      box-shadow: 0 12px 24px rgba(255, 255, 255, 0.08);
+    }
+
+    .interest-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .interest-card:hover .interest-image {
+      filter: brightness(1);
+      transform: scale(1.03);
+    }
+
+    .interest-icon {
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .interest-tag {
+      display: inline-block;
+      margin: 4px 4px 0 0;
+      padding: 4px 9px;
+      font-size: 12px;
+      color: #d8d8d8;
+      background-color: #333;
+      border: 1px solid #454545;
+      border-radius: 3px;
+    }
+
+    /* Social media buttons */
+    .social-button {
+      display: inline-block;
+      min-width: 140px;
+      margin: 6px;
+      text-decoration: none;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .social-button:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+
+    .tiktok-button {
+      background-color: #111;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+
+    .instagram-button {
+      background-color: #c13584;
+      color: #ffffff;
+    }
+
+    .facebook-button {
+      background-color: #1877f2;
+      color: #ffffff;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .interest-image {
+        height: 190px;
+      }
+
+      .social-button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+
+    /* Accessibility: turn off animation for users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .slide-down,
+      .scroll-slide {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+      }
+
+      .interest-card,
+      .interest-image,
+      .social-button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="w3-black">
+
+  <!-- Main Page Content -->
+  <main class="w3-padding-large" id="main">
+
+    <!-- Header -->
+    <header class="w3-container w3-padding-64 w3-center w3-black slide-down">
+      <i class="fa fa-heart-o w3-xxxlarge w3-text-white"></i>
+
+      <h1 class="w3-jumbo">Personal Interests</h1>
+
+      <p class="w3-large w3-text-grey">
+        Exploring technology, the outdoors, hands-on projects, and lifelong learning.
+      </p>
+    </header>
+
+    <!-- Introduction -->
+    <section class="w3-content w3-justify w3-text-grey w3-padding-32 scroll-slide">
+      <h2 class="w3-text-light-grey">Beyond Technology</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+      <p>
+        My interests reflect the same curiosity that drives my work in technology:
+        learning how systems operate, building practical skills, exploring new tools,
+        and spending time outdoors. Whether I am testing an off-grid communication setup,
+        designing a 3D-printed part, or getting out on the water, I enjoy activities that
+        combine problem-solving, experimentation, and continuous improvement.
+      </p>
+    </section>
+
+    <!-- Interest Cards -->
+    <section class="w3-content w3-padding-32 scroll-slide">
+      <div class="w3-row-padding" style="margin:0 -16px">
+
+        <!-- Paddleboarding -->
+        <div class="w3-col l6 m6 s12 w3-margin-bottom">
+          <article class="interest-card">
+
+            <!-- Replace image path with your own image -->
+            <img
+              src="images/paddleboarding.jpg"
+              alt="Paddleboard on calm water in Central Florida"
+              class="interest-image"
+              onerror="this.style.display='none'">
+
+            <div class="w3-container w3-padding-24">
+              <i class="fa fa-compass fa-2x interest-icon"></i>
+
+              <h3 class="w3-text-white">Paddleboarding in Central Florida</h3>
+
+              <p class="w3-text-grey">
+                Paddleboarding is a way to disconnect from screens and explore Florida's
+                lakes, springs, and calm waterways. It combines exercise, balance, outdoor
+                awareness, and an appreciation for the natural environment.
+              </p>
+
+              <span class="interest-tag">Outdoors</span>
+              <span class="interest-tag">Fitness</span>
+              <span class="interest-tag">Central Florida</span>
+              <span class="interest-tag">Waterways</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Meshtastic / LoRa -->
+        <div class="w3-col l6 m6 s12 w3-margin-bottom">
+          <article class="interest-card">
+
+            <!-- Replace image path with your own image -->
+            <img
+              src="images/meshtastic-lora.jpg"
+              alt="LoRa device used for off-grid mesh networking"
+              class="interest-image"
+              onerror="this.style.display='none'">
+
+            <div class="w3-container w3-padding-24">
+              <i class="fa fa-rss fa-2x interest-icon"></i>
+
+              <h3 class="w3-text-white">Meshtastic and LoRa Concepts</h3>
+
+              <p class="w3-text-grey">
+                Meshtastic and LoRa-based mesh communication are interesting examples of
+                low-power technology supporting decentralized, off-grid messaging. I enjoy
+                learning about radio devices, antennas, node placement, coverage testing,
+                and mesh-network design concepts.
+              </p>
+
+              <span class="interest-tag">LoRa</span>
+              <span class="interest-tag">Mesh Networks</span>
+              <span class="interest-tag">Radio</span>
+              <span class="interest-tag">Off-Grid Concepts</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- 3D Printing -->
+        <div class="w3-col l6 m6 s12 w3-margin-bottom">
+          <article class="interest-card">
+
+            <!-- Replace image path with your own image -->
+            <img
+              src="images/3d-printing.jpg"
+              alt="A 3D printer creating a layered object"
+              class="interest-image"
+              onerror="this.style.display='none'">
+
+            <div class="w3-container w3-padding-24">
+              <i class="fa fa-cube fa-2x interest-icon"></i>
+
+              <h3 class="w3-text-white">3D Printing</h3>
+
+              <p class="w3-text-grey">
+                3D printing brings digital design into the physical world. I enjoy testing
+                materials, adjusting print settings, troubleshooting failures, and creating
+                practical custom parts for home-lab projects, organization, and everyday use.
+              </p>
+
+              <span class="interest-tag">Maker Projects</span>
+              <span class="interest-tag">Design</span>
+              <span class="interest-tag">Prototyping</span>
+              <span class="interest-tag">Troubleshooting</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Swimming -->
+        <div class="w3-col l6 m6 s12 w3-margin-bottom">
+          <article class="interest-card">
+
+            <!-- Replace image path with your own image -->
+            <img
+              src="images/swimming.jpg"
+              alt="Clear blue swimming pool water"
+              class="interest-image"
+              onerror="this.style.display='none'">
+
+            <div class="w3-container w3-padding-24">
+              <i class="fa fa-tint fa-2x interest-icon"></i>
+
+              <h3 class="w3-text-white">Swimming</h3>
+
+              <p class="w3-text-grey">
+                Swimming is an important part of maintaining balance, endurance, and overall
+                wellness. It provides a focused environment for improving technique,
+                consistency, physical conditioning, and recovery.
+              </p>
+
+              <span class="interest-tag">Wellness</span>
+              <span class="interest-tag">Endurance</span>
+              <span class="interest-tag">Fitness</span>
+              <span class="interest-tag">Consistency</span>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom Section -->
+    <section class="w3-content w3-padding-32 w3-center w3-text-grey scroll-slide">
+      <h2 class="w3-text-light-grey">Always Learning</h2>
+      <hr style="width:200px; margin:auto;" class="w3-opacity">
+
+      <p class="w3-padding-16">
+        Each interest provides a different way to learn, experiment, stay active,
+        and build practical skills both on and off the screen.
+      </p>
+
+      <!-- Back to Portfolio Button -->
+      <a
+        href="index.html#portfolio"
+        class="w3-button w3-light-grey w3-padding-large w3-margin-top">
+        <i class="fa fa-arrow-left"></i>
+        BACK TO PORTFOLIO
+      </a>
+
+      <!-- Social Media Buttons -->
+      <div class="w3-padding-32">
+        <h3 class="w3-text-light-grey">Connect With Me</h3>
+
+        <!-- Replace # with your TikTok profile link -->
+        <a
+          href="#"
+          class="w3-button w3-padding-large social-button tiktok-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit my TikTok profile">
+          <i class="fa fa-music"></i>
+          TIKTOK
+        </a>
+
+        <!-- Replace # with your Instagram profile link -->
+        <a
+          href="#"
+          class="w3-button w3-padding-large social-button instagram-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit my Instagram profile">
+          <i class="fa fa-instagram"></i>
+          INSTAGRAM
+        </a>
+
+        <!-- Replace # with your Facebook profile link -->
+        <a
+          href="#"
+          class="w3-button w3-padding-large social-button facebook-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit my Facebook profile">
+          <i class="fa fa-facebook"></i>
+          FACEBOOK
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-32 w3-center w3-text-grey">
+      <p class="w3-small">
+        © Omar SantosColón. Built as part of my digital portfolio.
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observerOptions = {
+      root: null,
+      threshold: 0.1,
+      rootMargin: "0px 0px -40px 0px"
+    };
+
+    const slideObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".scroll-slide").forEach((element) => {
+      slideObserver.observe(element);
+    });
+  </script>
+
+</body>
+</html>
