@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2026-10-10 05:07:59">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Admin Center">1163fa730f102010e8c940c1df767e8c</application>
+<application_name>Admin Center</application_name>
+<application_scope>sn_admin_center</application_scope>
+<application_version>6.2.1</application_version>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description>Automatically created by the system</description>
+<inserted/>
+<name>Default</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>3de4f77b93af4fd0756873118bba1047</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-10-10 05:07:57</sys_created_on>
+<sys_id>bc95515693374b50756873118bba105c</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-10-10 05:07:57</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Admin Center">1163fa730f102010e8c940c1df767e8c</application>
+<category>customer</category>
+<comments/>
+<name>sys_polaris_menu_config_e708a3f75372011010baddeeff7b120a</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_polaris_menu_config"><sys_polaris_menu_config action="INSERT_OR_UPDATE"><active>false</active><hidden_roles/><name>Admin</name><order>5</order><sys_class_name>sys_polaris_menu_config</sys_class_name><sys_created_by>maint</sys_created_by><sys_created_on>2022-04-18 21:06:55</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>e708a3f75372011010baddeeff7b120a</sys_id><sys_mod_count>2</sys_mod_count><sys_name>Admin</sys_name><sys_overrides/><sys_package display_value="Admin Center" source="sn_admin_center">1163fa730f102010e8c940c1df767e8c</sys_package><sys_policy/><sys_scope display_value="Admin Center">1163fa730f102010e8c940c1df767e8c</sys_scope><sys_update_name>sys_polaris_menu_config_e708a3f75372011010baddeeff7b120a</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2026-10-02 22:19:16</sys_updated_on><type>snc_internal</type><visible_roles>admin</visible_roles></sys_polaris_menu_config></record_update>]]></payload>
+<payload_hash>-1749042053</payload_hash>
+<remote_update_set display_value="Default">bc95515693374b50756873118bba105c</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>admin</sys_created_by>
+<sys_created_on>2026-10-10 05:07:57</sys_created_on>
+<sys_id>f095515693374b50756873118bba105d</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1a0feb346290000001</sys_recorded_at>
+<sys_updated_by>admin</sys_updated_by>
+<sys_updated_on>2026-10-10 05:07:57</sys_updated_on>
+<table/>
+<target_name>Admin</target_name>
+<type>Unified Navigation Menu</type>
+<update_domain>global</update_domain>
+<update_guid>f9e4f77b39af4fd036c726ef20ad4d4a</update_guid>
+<update_guid_history>f9e4f77b39af4fd036c726ef20ad4d4a:-1749042053,3de4f77bf2af4fd0ca0989d960509444:-1872850594</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
