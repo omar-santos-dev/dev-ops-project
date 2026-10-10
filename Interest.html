@@ -24,11 +24,21 @@
       scroll-behavior: smooth;
     }
 
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
     /*
       No left sidebar or top navigation.
       Page content uses the full screen width.
     */
     #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       margin-left: 0;
       padding-top: 0;
     }
@@ -95,62 +105,19 @@
     }
 
     .interest-icon {
-      color: #ffffff;
       margin-bottom: 12px;
+      color: #ffffff;
     }
 
     .interest-tag {
       display: inline-block;
       margin: 4px 4px 0 0;
       padding: 4px 9px;
-      font-size: 12px;
       color: #d8d8d8;
-      background-color: #333;
+      background-color: #333333;
       border: 1px solid #454545;
       border-radius: 3px;
-    }
-
-    /* Return to Portfolio Button */
-    .action-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      margin-top: 8px;
-      padding: 11px 16px;
-      color: #ffffff;
-      background-color: #1e1e1e;
-      border: 1px solid #bdbdbd;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 0.4px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .action-button-dark {
-      color: #ffffff;
-      background-color: #1e1e1e;
-    }
-
-    .action-button:hover {
-      color: #ffffff;
-      background-color: #333333;
-      border-color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    .action-button:focus {
-      outline: 2px solid #ffffff;
-      outline-offset: 3px;
-    }
-
-    .action-button i {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     /* Social media buttons */
@@ -171,8 +138,8 @@
 
     .tiktok-button {
       color: #ffffff;
-      background-color: #111;
-      border: 1px solid #555;
+      background-color: #111111;
+      border: 1px solid #555555;
     }
 
     .instagram-button {
@@ -183,6 +150,51 @@
     .facebook-button {
       color: #ffffff;
       background-color: #1877f2;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 32px 16px;
+      color: #757575;
+      text-align: center;
+    }
+
+    /* Return to Portfolio button */
+    .return-home-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 11px 16px;
+      color: #ffffff;
+      background-color: #1e1e1e;
+      border: 1px solid #bdbdbd;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .return-home-button:hover {
+      color: #ffffff;
+      background-color: #333333;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .return-home-button:focus {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    .return-home-button i {
+      font-size: 14px;
     }
 
     @media only screen and (max-width: 600px) {
@@ -197,7 +209,7 @@
       }
     }
 
-    /* Accessibility: turn off animation for users who prefer less motion */
+    /* Accessibility: reduce animation when requested by the user */
     @media (prefers-reduced-motion: reduce) {
       html {
         scroll-behavior: auto;
@@ -214,7 +226,7 @@
       .interest-card,
       .interest-image,
       .social-button,
-      .action-button {
+      .return-home-button {
         transition: none;
       }
     }
@@ -371,7 +383,7 @@
       </div>
     </section>
 
-    <!-- Bottom Section -->
+    <!-- Social Media Section -->
     <section class="w3-content w3-padding-32 w3-center w3-text-grey scroll-slide">
       <h2 class="w3-text-light-grey">Always Learning</h2>
       <hr style="width:200px; margin:auto;" class="w3-opacity">
@@ -381,19 +393,10 @@
         and build practical skills both on and off the screen.
       </p>
 
-      <!-- Back to Portfolio Button -->
-      <a
-        class="action-button action-button-dark"
-        href="https://omar-santos-dev.github.io/dev-ops-project/">
-        <i class="fa fa-home"></i>
-        Return to Portfolio
-      </a>
-
-      <!-- Social Media Buttons -->
       <div class="w3-padding-32">
         <h3 class="w3-text-light-grey">Connect With Me</h3>
 
-        <!-- Replace # with your TikTok profile link -->
+        <!-- Replace # with your TikTok profile URL -->
         <a
           href="#"
           class="w3-button w3-padding-large social-button tiktok-button"
@@ -404,7 +407,7 @@
           TIKTOK
         </a>
 
-        <!-- Replace # with your Instagram profile link -->
+        <!-- Replace # with your Instagram profile URL -->
         <a
           href="#"
           class="w3-button w3-padding-large social-button instagram-button"
@@ -415,7 +418,7 @@
           INSTAGRAM
         </a>
 
-        <!-- Replace # with your Facebook profile link -->
+        <!-- Replace # with your Facebook profile URL -->
         <a
           href="#"
           class="w3-button w3-padding-large social-button facebook-button"
@@ -429,7 +432,14 @@
     </section>
 
     <!-- Footer -->
-    <footer class="w3-content w3-padding-32 w3-center w3-text-grey">
+    <footer>
+      <a
+        href="index.html#portfolio"
+        class="return-home-button">
+        <i class="fa fa-home"></i>
+        Return to Portfolio
+      </a>
+
       <p class="w3-small">
         © Omar SantosColón. Built as part of my digital portfolio.
       </p>
